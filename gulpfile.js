@@ -40,4 +40,12 @@ const webServer = () => {
     })
 }
 
-exports.default = gulp.parallel(webServer);
+const pugTask = () => {
+    return gulp.src(config.app.html)
+        .pipe(pug())
+        .pipe(pug({
+            pretty: false
+        }))
+        .pipe(gulp.dest(config.dist.html))
+        .pipe(browserSync.reload({ stream: true }))
+}
